@@ -1,0 +1,18 @@
+.div-form{
+    display: none;
+    flex-direction: column; 
+    width: 17em;
+}
+
+.b-f{
+    width: 5em;
+}
+
+img{
+    width: 10em;
+}
+
+.container{
+    display: grid;
+    grid-template-columns: 17em auto;
+}

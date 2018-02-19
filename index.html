@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="css/style.css">
+    <title>Document</title>
+</head>
+<body>
+
+   <button id="btn1">Products</button>
+    <button id="btn2">Checkout</button>
+    
+    <!--Produckter-->
+    <div class="container" id="produckter">
+
+    </div>
+
+    <!--Form-->
+    <div class="div-form" id="checkout">
+        <label for="Firstname">First name*</label>
+        <input type="text" id="Firstname" onkeyup="checkName ();" required="required">
+        <label id="FirstnamePrompt"></label>
+
+        <label for="Lastname">Last name*</label>
+        <input type="text" id="Lastname" onkeyup="checkName ();" required="required">
+
+        <label for="Emailaddress">Email address*</label>
+        <input type="text" id="Emailaddress" onkeyup="checkEmail ();" required="required">
+        <label id="EmailPrompt"></label>
+
+        <label for="Phonenumber">Phone number*</label>
+        <input type="text" id="Phonenumber" onkeyup="checkPhone ();" required="required">
+        <label id="PhonePrompt"></label>
+
+        <label for="Streetaddress">Street address*</label>
+        <input type="text" id="Streetaddress" onkeyup="checkStreet ();" required="required">
+        <label id="StreetPrompt"></label>
+
+        <label for="Zipcode">Zip code*</label>
+        <input type="text" id="Zipcode" onkeyup="checkZip ();" required="required">
+        <label id="ZipPrompt"></label>
+
+        <label for="City">City*</label>
+        <input type="text" id="City" onkeyup="checkCity ();" required="required">
+        <label id="CityPrompt"></label>
+        
+        <button class="b-f" onclick="checkForm ();">Submit</button>
+        <label id="CheckPrompt"></label>
+    </div>
+
+    <script src="js/index.js"></script>
+</body>
+</html>
