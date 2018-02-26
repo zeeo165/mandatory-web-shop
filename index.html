@@ -13,12 +13,23 @@
     <button id="btn2">Checkout</button>
     
     <!--Produckter-->
+    <div>
+            <p></span><span id="shoppingCart">0</span></p>
+    </div>  
     <div class="container" id="produckter">
 
     </div>
 
     <!--Form-->
     <div class="div-form" id="checkout">
+        <div id="produckter-in-cart">
+            <div><span id="pro1"></span><button id="pro1add">+</button><button id="pro1remove">-</button></div>
+            <div><span id="pro2"></span><button id="pro2add">+</button><button id="pro2remove">-</button></div>
+            <div><span id="pro3"></span><button id="pro3add">+</button><button id="pro3remove">-</button></div>
+            <div><span id="pro4"></span><button id="pro4add">+</button><button id="pro4remove">-</button></div>
+            <div><span id="pro5"></span><button id="pro5add">+</button><button id="pro5remove">-</button></div>
+        </div>
+
         <label for="Firstname">First name*</label>
         <input type="text" id="Firstname" onkeyup="checkName ();" required="required">
         <label id="FirstnamePrompt"></label>
