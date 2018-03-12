@@ -1,209 +1,220 @@
 
 /*Pages*/
-    let pdbtn = document.getElementById("produckter");
-    let formbtn = document.getElementById("checkout");
+    let pdbtn = $("#produckter");
+    let formbtn = $("#checkout");
 
-    document.getElementById("btn1").addEventListener("click", function(){
-        formbtn.style.display = "none";
-        pdbtn.style.display = "grid";
-    })   
+        $( "#btn1" ).click(function(){
+            $(formbtn).css("display","none");
+            $(pdbtn).css("display","grid");
+        });   
 
-    document.getElementById("btn2").addEventListener("click", function(){
-        pdbtn.style.display = "none";
-        formbtn.style.display = "flex";
-})
-
+        $( "#btn2" ).click(function(){
+            $(pdbtn).css("display","none");
+            $(formbtn).css("display","flex");
+        });
 /*Prouckter*/ 
-    const pd = [
-    {
-        name: "The Secret of Monkey Island",
-        price: "34,71kr",
-        description: "Väldigt roligt spel",
-        url: "https://lumiere-a.akamaihd.net/v1/images/open-uri20150422-7119-ljenpy_0adafb3a.jpeg?region=0,0,1000,1429"
-    },
-    {
-        name: "Monkey Island 2: LeChuck's Revenge",
-        price: "34,71kr",
-        description: "like roligt som det förs spelet!",
-        url: "https://lumiere-a.akamaihd.net/v1/images/open-uri20150422-7119-6l88b5_40473e7d.jpeg?region=0,0,1000,1429"
-    },
-    {
-        name: "The Curse of Monkey Island",
-        price: "34,71kr",
-        description: "like roligt som det förs spelet!!",
-        url: "https://upload.wikimedia.org/wikipedia/en/thumb/2/26/The_Curse_of_Monkey_Island_artwork.jpg/220px-The_Curse_of_Monkey_Island_artwork.jpg"
-    },
-    {
-        name: "Escape from Monkey Island",
-        price: "34,71kr",
-        description: "like roligt som det förs spelet!!!",
-        url: "https://upload.wikimedia.org/wikipedia/en/thumb/d/d6/Escape_from_Monkey_Island_artwork.jpg/220px-Escape_from_Monkey_Island_artwork.jpg"
-    },
-    {
-        name: "Tales of Monkey Island",
-        price: "34,71kr",
-        description: "like roligt som det förs spelet!!!!",
-        url: "https://upload.wikimedia.org/wikipedia/en/thumb/5/53/Tales_of_Monkey_Island_artwork.jpg/220px-Tales_of_Monkey_Island_artwork.jpg"
-    }
-]
+
+    fetch('http://demo.edument.se/api/products')
+    .then(response => response.json())
+    .then(products => items(products))
+    .catch(err => console.log(err));
 
 /*Produckt Poster*/
-    pd.forEach(pd => {
-    let pds = document.getElementById("produckter");
-    let div = document.createElement("div");
-    let pen1 = document.createElement("h3");
-    let pen2 = document.createElement("p");
-    let pen3 = document.createElement("p");
-    let img = document.createElement("IMG");
+    function items(data){
+        data.forEach(data => {
+            let pds = $("#produckter");
+            let div = $("<div></div>");
+            let pen1 = $("<h3></h3>");
+            let pen2 = $("<p></p>");
+            let pen3 = $("<p></p>");
+            let img = $("<img>");
+            let button = $("<button></button>");
+            let link = $("<a></a>");
 
-    img.src = pd.url;
-    
-    let name = document.createTextNode(pd.name);
-    let price = document.createTextNode(pd.price);
-    let description = document.createTextNode(pd.description);
+            $(button).attr("class", "add_to_cart");
+            $(link).attr("class", "recen" + [data.Id]);
+            
 
-    pds.appendChild(div);
+            $(pds).append(div);
+            
+            $(div).append(pen1,pen2,pen3,img,button,link);
+            
+            $(pen1).html(data.Name);
+            $(pen2).html(data.Price)
+            $(pen3).html(data.Description)
+            $(img).attr("src", data.Image)
+            $(button).html("Add to Cart");
+            $(link).html("Se mer");
+    });
 
-    div.appendChild(pen1);
-    div.appendChild(pen2);
-    div.appendChild(pen3);
-    div.appendChild(img);
+    for(let i = 0; i < data.length; i++)
+    $(".recen" + [data[i].Id]).click(function(e){
+        
+        let pds = $("#produckter");
+        let div = $("<div></div>");
+        let pen1 = $("<h3></h3>");
+        let pen2 = $("<p></p>");
+        let pen3 = $("<p></p>");
+        let img = $("<img>");
+        let button = $("<button></button>");
+        let link = $("<a></a>");
 
-    pen1.appendChild(name);
-    pen2.appendChild(price);
-    pen3.appendChild(description);
-});
+        $(pds).css("display", "none");
+        $(div).attr("id", "review" + data[i].Id);
+        $(div).attr("data-value", data[i].Id);
+        $(div).attr("class", "container");
+        $(div).css("display", "block");
+        recension(data[i].Id);
+    })
 
-
+    console.log(data);
+}
 /*CheckName*/ 
     function checkName(){
-    let name = document.getElementById("Firstname").value;
-    let lastname = document.getElementById("Lastname").value;
-    
+        let name = $("#Firstname").val();
+        let lastname = $("#Lastname").val();
+        
 
-    if(name.length === 0 || lastname.length === 0)
-    {
-        wrightMessage("A full name is required", "FirstnamePrompt", "red", "Firstname" , "Lastname");
-        return false;
-    } 
-    
-    if(!name.match(/^[a-zA-Z]+$/))
-    {
-        wrightMessage("Invalid characters", "FirstnamePrompt", "red" , "Firstname" , "Lastname");
-        return false;
-    }
+        if(name.length === 0 || lastname.length === 0)
+        {
+            wrightMessage("A full name is required", "#FirstnamePrompt", "red", "#Firstname" , "#Lastname");
+            return false;
+        } 
+        
+        if(!name.match(/^[a-zA-Z]+$/))
+        {
+            wrightMessage("Invalid characters", "FirstnamePrompt", "red" , "#Firstname" , "#Lastname");
+            return false;
+        }
 
-    wrightMessage("name " + name + " " + lastname + " is valid",  "FirstnamePrompt", "green" , "Firstname" , "Lastname");
-    return true;
+        wrightMessage("name " + name + " " + lastname + " is valid",  "#FirstnamePrompt", "green" , "#Firstname" , "#Lastname");
+        return true;
 }
 /*CheckEmail*/ 
     function checkEmail(){
-    let email = document.getElementById("Emailaddress").value;
-    
+        let email = $("#Emailaddress").val();
+        
 
-    if(email.indexOf("@") === -1)
-    {
-        wrightMessage("A email is required", "EmailPrompt", "red", "Emailaddress");
-        return false;
-    } 
+        if(email.indexOf("@") === -1)
+        {
+            wrightMessage("A email is required", "#EmailPrompt", "red", "#Emailaddress");
+            return false;
+        } 
 
-    wrightMessage("email is valid", "EmailPrompt", "green", "Emailaddress");
-    return true;
+        wrightMessage("email is valid", "#EmailPrompt", "green", "#Emailaddress");
+        return true;
 }
 /*CheckPhone*/ 
     function checkPhone(){
-    let phone = document.getElementById("Phonenumber").value;
-    
-    if(phone.length === 0)
-    {
-        wrightMessage("Phone number is required", "PhonePrompt", "red", "Phonenumber");
-        return false;
-    }
-    
-    if(!phone.match(/^[0-9]{10}$/))
-    {
-        wrightMessage("Only 10 digits is required", "PhonePrompt", "red", "Phonenumber");
-        return false;
-    }
+        let phone = $("#Phonenumber").val();
+        
+        if(phone.length === 0)
+        {
+            wrightMessage("Phone number is required", "#PhonePrompt", "red", "#Phonenumber");
+            return false;
+        }
+        
+        if(!phone.match(/^[0-9]{10}$/))
+        {
+            wrightMessage("Only 10 digits is required", "#PhonePrompt", "red", "#Phonenumber");
+            return false;
+        }
 
 
-    wrightMessage("Phone Number is Valid", "PhonePrompt", "green", "Phonenumber");
-    return true;
+        wrightMessage("Phone Number is Valid", "#PhonePrompt", "green", "#Phonenumber");
+        return true;
 }
 /*CheckStreet*/ 
     function checkStreet(){
-    let street = document.getElementById("Streetaddress").value;
+        let street = $("#Streetaddress").val();
 
-    if(street.length === 0){
-        wrightMessage("Street Address is required", "StreetPrompt", "red", "Streetaddress");
-        return false;
-    }
+        if(street.length === 0){
+            wrightMessage("Street Address is required", "#StreetPrompt", "red", "#Streetaddress");
+            return false;
+        }
 
-    wrightMessage("Street Address is Valid", "StreetPrompt", "Green", "Streetaddress");
-    return true;
+        wrightMessage("Street Address is Valid", "#StreetPrompt", "Green", "#Streetaddress");
+        return true;
 }
 /*CheckZip*/ 
     function checkZip(){
-    let zip = document.getElementById("Zipcode").value;
+    let zip = $("#Zipcode").val();
 
     if(zip.length === 0){
-        wrightMessage("swedish Zipcode is required", "ZipPrompt", "red", "Zipcode");
+        wrightMessage("swedish Zipcode is required", "#ZipPrompt", "red", "#Zipcode");
         return false;
     }
     if(!zip.match(/^[0-9]{5}$/))
     {
-        wrightMessage("this is not a swedish Zipcode", "ZipPrompt", "red", "Zipcode");
+        wrightMessage("this is not a swedish Zipcode", "#ZipPrompt", "red", "#Zipcode");
         return false;
     }
 
-    wrightMessage("swedish Zipcode is Valid", "ZipPrompt", "Green", "Zipcode");
+    wrightMessage("swedish Zipcode is Valid", "#ZipPrompt", "Green", "#Zipcode");
     return true;
 }
 /*CheckCity*/ 
     function checkCity(){
-    let city = document.getElementById("City").value;
+        let city = $("#City").val();
 
-    if(city.length === 0){
-        wrightMessage("swedish city is required", "CityPrompt", "red", "City");
-        return false;
-    }
+        if(city.length === 0){
+            wrightMessage("swedish city is required", "#CityPrompt", "red", "#City");
+            return false;
+        }
 
-    if(!city.match(/^[a-zA-Z]+$/))
-    {
-        wrightMessage("Invalid characters", "CityPrompt", "red", "City");
-        return false;
-    }
+        if(!city.match(/^[a-zA-Z]+$/))
+        {
+            wrightMessage("Invalid characters", "#CityPrompt", "red", "#City");
+            return false;
+        }
 
-    wrightMessage("swedish City is Valid", "CityPrompt", "Green", "City");
-    return true;
+        wrightMessage("swedish City is Valid", "#CityPrompt", "Green", "#City");
+        return true;
 }
 /*CheckForm*/
+
+    let name = $("#Firstname").val();
+    let lastname = $("#Lastname").val();
+    let email = $("#Emailaddress").val();
+    let phone = $("#Phonenumber").val();
+    let address = $("#Streetaddress").val();
+    let zipcode = $("#Zipcode").val();
+    let city = $("#City").val();
+
     function checkForm(){
     
     if(!checkName() || !checkEmail() || !checkPhone() || !checkStreet() || !checkZip() || !checkCity())
     {
         show("CheckPrompt");
-        wrightMessage("Form must be valid to submit", "CheckPrompt", "red");
-        setTimeout(function(){hide("CheckPrompt");}, 2000);
+        wrightMessage("Form must be valid to submit", "#CheckPrompt", "red");
+        setTimeout(function(){hide("#CheckPrompt");}, 2000);
     }
     else{
+        fetch('http://demo.edument.se/api/orders',{
+            method: 'POST',
+            body: JSON.stringify({ id: 1, FirstName: name, LastName: lastname, Email: email, Phone: phone, StreetAddress: address, ZipCode: zipcode, City: city, Comment: "", OrderItems: cart}),
+            headers: new Headers({
+                'Content-Type': 'application/json'
+            })            
+        })
+
         show("CheckPrompt");
-        wrightMessage("Form Sent", "CheckPrompt", "green");
-        setTimeout(function(){hide("CheckPrompt");}, 2000)
+        wrightMessage("Form Sent", "#CheckPrompt", "green");
+        setTimeout(function(){hide("#CheckPrompt");}, 2000)
     }
 }
 /*Show*/
     function show(id){
-    document.getElementById(id).style.display = "block";
+        $( id ).css("display","block");
 }
 /*hide*/
     function hide(id){
-    document.getElementById(id).style.display = "none";
+        $( id ).css("display","hide");
 }
 /*wrightMessage*/
     function wrightMessage(message, messageLocation, color, borderLocation , borderLocation2){
-    document.getElementById(messageLocation).innerHTML = message;
-    document.getElementById(messageLocation).style.color = color;
-    document.getElementById(borderLocation).style.borderColor = color;
-    document.getElementById(borderLocation2).style.borderColor = color;
+        $(messageLocation).html(message);
+        $(messageLocation).css("color",color);
+        $(borderLocation).css("border-color",color);
+        $(borderLocation2).css("border-color",color);
 }

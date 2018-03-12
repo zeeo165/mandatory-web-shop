@@ -1,7 +1,7 @@
 .div-form{
     display: none;
     flex-direction: column; 
-    width: 17em;
+    width: 19em;
 }
 
 .b-f{
@@ -14,5 +14,9 @@ img{
 
 .container{
     display: grid;
-    grid-template-columns: 17em auto;
+    grid-template-columns: 19em auto;
+}
+
+.container-review{
+    display: block;
 }
