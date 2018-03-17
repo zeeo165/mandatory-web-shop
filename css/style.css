@@ -16,3 +16,7 @@ img{
     display: grid;
     grid-template-columns: 17em auto;
 }
+
+#pro1add, #pro2add, #pro3add, #pro4add, #pro5add, #pro1remove, #pro2remove, #pro3remove, #pro4remove, #pro5remove{
+    display: none;
+}
